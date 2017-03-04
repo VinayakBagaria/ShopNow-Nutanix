@@ -1,0 +1,42 @@
+<nav class="navbar navbar-default"> {# standard navbar class declaratn ; use navbar-inverse instead of navbar-default for black bckgnd #}
+  <div class="container-fluid">
+    <div class="navbar-header">
+      {# just add a data-toggle="collapse" and specify a data-target to make a collapsible element.  #}
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toogle Navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="{% url 'home' %}" class="navbar-brand">Shop Now</a>
+    </div>
+    {# putting collapse tells that the navbar should be collapsed when the screen is 1st shown in minimized form #}
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <form class="navbar-form navbar-left" method="GET" action="{% url 'search' %}">   {# left justification #}
+        <div class="form-group">
+          <input type="text" class="form-control" name="q" placeholder="Search" value="{{ request.GET.q }}">
+        </div>
+        <button type="submit" class="btn btn-default">Search</button>
+      </form>
+      <ul class="nav navbar-nav navbar-right">  {# right justification #}
+        {% if request.user.is_authenticated %}
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li style="text-align:center">{{request.user|capfirst}}</li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#" id="showCart">Cart</a></li>
+              <li><a href="#">Profile</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="{% url 'logout' %}">Logout</a></li>
+            </ul>
+          </li>
+        {% else %}
+          <li><a href="{% url 'login' %}">Login</a></li>
+          <li><a href="{% url 'register' %}">Register</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>

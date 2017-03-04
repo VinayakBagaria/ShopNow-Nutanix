@@ -14,4 +14,4 @@ Bootstrap;
 Django;
 SQLite3;
 Jinja (templating);
-django-crispy-forms;
+django-crispy-forms
